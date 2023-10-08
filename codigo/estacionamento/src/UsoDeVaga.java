@@ -7,33 +7,33 @@ public class UsoDeVaga {
 	private static final double VALOR_FRACAO = 4.0;
 	private static final double VALOR_MAXIMO = 50.0;
 	private Vaga vaga;
-	public LocalDateTime entrada;
-	public LocalDateTime saida;
+	private LocalDateTime entrada;
+	private LocalDateTime saida;
 	private double valorPago;
+	
 
 	public UsoDeVaga(Vaga vaga) {
 		this.vaga = vaga;
 	}
 
 	public double sair() {
-		if(this.vaga.sair()){
-			this.entrada = LocalDateTime.parse("2023-09-20T10:00:00");
-			this.saida = LocalDateTime.parse("2023-09-20T15:50:00");
+		if (this.vaga.sair()) {
+			this.entrada = LocalDateTime.now();
+			this.saida = LocalDateTime.now();
 			return this.valorPago();
 		}
 		return 0.0;
 	}
 
+	//Calcular o valor a ser pago
 	public double valorPago() {
-		if(this.VALOR_FRACAO* fracaoTempoCobrar() > this.VALOR_MAXIMO){
-				this.valorPago = this.VALOR_MAXIMO;
-			}
-			else{
-				this.valorPago = this.VALOR_FRACAO * this.fracaoTempoCobrar();
-			}
-			return this.valorPago;
+		if (this.VALOR_FRACAO * fracaoTempoCobrar() > this.VALOR_MAXIMO) {
+			this.valorPago = this.VALOR_MAXIMO;
+		} else {
+			this.valorPago = this.VALOR_FRACAO * this.fracaoTempoCobrar();
 		}
-		
+		return this.valorPago;
+	}
 	
 	private Integer tempoEstacionado(){
 		Duration duration = Duration.between(this.entrada, this.saida);

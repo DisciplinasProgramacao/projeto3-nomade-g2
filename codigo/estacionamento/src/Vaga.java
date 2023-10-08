@@ -6,7 +6,7 @@ public class Vaga {
 	private boolean disponivel;
 
 	public Vaga(String fila, Integer numero) {
-		this.id =fila + numero.toString().format("%02d", numero);
+		this.id =fila + String.format("%02d", numero);
 		this.disponivel = true;
 	}
 
