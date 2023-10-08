@@ -7,8 +7,8 @@ public class UsoDeVaga {
 	private static final double VALOR_FRACAO = 4.0;
 	private static final double VALOR_MAXIMO = 50.0;
 	private Vaga vaga;
-	private LocalDateTime entrada;
-	private LocalDateTime saida;
+	public LocalDateTime entrada;
+	public LocalDateTime saida;
 	private double valorPago;
 
 	public UsoDeVaga(Vaga vaga) {
@@ -42,5 +42,9 @@ public class UsoDeVaga {
 	
 	private Double fracaoTempoCobrar(){
 		return Math.floor(tempoEstacionado().doubleValue() / 15.0);
+	}
+
+	public Double getValorPago(){
+		return this.valorPago;
 	}
 }
