@@ -5,13 +5,15 @@ public class Vaga {
 	private String id;
 	private boolean disponivel;
 
-	public Vaga(String fila, Integer numero) {
-		this.id =fila + String.format("%02d", numero);
+	public Vaga(int i, Integer numero) {
+		this.id =i + String.format("%02d", numero);
 		this.disponivel = true;
 	}
 
-	public boolean estacionar() {
-		if(this.disponivel()){
+	public Vaga(int i, int numero) {
+    }
+
+    nivel(){
 		this.disponivel = false;
 		return true;
 	}
