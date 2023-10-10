@@ -9,39 +9,41 @@ public class Veiculo {
 
 	public Veiculo(String placa) {
 		this.placa = placa;
+		this.usos = new ArrayList<>();
 		this.totalArrecadado = 0.0;
+		this.arrecadadoMes = 0.0;
 	}
 
 	public boolean estacionar(Vaga vaga) {
-		if(!vaga.estacionar()){
+		if (!vaga.estacionar()) {
 			return false;
 		}
-		return true;
+		return vaga.estacionar();
 	}
 
 	public double sair() {
-		return usos.get(usos.size()-1).sair();
+		double valorPago = usos.get(usos.size() - 1).sair();
+		this.totalArrecadado += valorPago;
+		return valorPago;
 
 	}
 
 	public double totalArrecadado() {
-		for(UsoDeVaga uso: usos){
-			this.totalArrecadado+= uso.valorPago();
-		}
 		return this.totalArrecadado();
 	}
 
 	public double arrecadadoNoMes(int mes) {
-		for(int i = 0; i<usos.size(); i++){
-		if(usos.get(i).saida.getMonth().equals(mes)){
-			this.arrecadadoMes += usos.get(i).valorPago();
+		this.arrecadadoMes = 0.0;
+		for(UsoDeVaga uso: usos){
+			if(uso.saida.getMonth().equals(mes)){
+				this.arrecadadoMes += uso.valorPago();
+			}
 		}
-	}
-	return this.arrecadadoMes;
+		return this.arrecadadoMes;
 	}
 
 	public int totalDeUsos() {
-		return this.usos.size() -1;
+		return this.usos.size();
 	}
 
 	public void setVaga(UsoDeVaga usodevaga){
