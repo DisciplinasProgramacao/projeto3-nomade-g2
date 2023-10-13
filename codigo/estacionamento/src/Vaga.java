@@ -5,27 +5,27 @@ public class Vaga {
 	private String id;
 	private boolean disponivel;
 
-	public Vaga(int i, Integer numero) {
-		this.id =i + String.format("%02d", numero);
+	public Vaga(String id, Integer numero) {
+		this.id =id + String.format("%02d", numero);
 		this.disponivel = true;
 	}
 
-	public Vaga(int i, int numero) {
-    }
-
-    nivel(){
-		this.disponivel = false;
-		return true;
-	}
-		return false;
+	public boolean estacionar(){
+		if(this.disponivel()){
+			this.disponivel = false;
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public boolean sair() {
 		if(!this.disponivel()){
 		this.disponivel = true;
 		return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public boolean disponivel() {

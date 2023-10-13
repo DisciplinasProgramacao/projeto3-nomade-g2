@@ -9,14 +9,14 @@ public class VeiculoTeste {
     
     
     public static boolean testEstacionar() {
-        Vaga vaga = new Vaga(20, 1234); // Supondo que você tenha uma classe Vaga
+        Vaga vaga = new Vaga("1234",20 ); 
         return veiculo.estacionar(vaga);
     }
 
     
     public static String testSair() {
         Veiculo veiculo = new Veiculo("ABC-1234");
-        UsoDeVaga uso = new UsoDeVaga(null); // Supondo que você tenha uma classe UsoDeVaga
+        UsoDeVaga uso = new UsoDeVaga(null); 
         veiculo.setVaga(uso);
         return (uso.sair()+","+ veiculo.sair());
     }
