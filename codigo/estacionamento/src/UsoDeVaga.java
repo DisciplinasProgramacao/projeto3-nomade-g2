@@ -11,7 +11,6 @@ public class UsoDeVaga {
 	private LocalDateTime saida;
 	private double valorPago;
 	
-
 	public UsoDeVaga(Vaga vaga) {
 		this.vaga = vaga;
 	}
