@@ -1,51 +1,79 @@
-import static org.junit.Assert.*;
-
-import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class ClienteTest {
 
-    private Cliente cliente;
-
-    @Before
-    public void setUp() {
-        cliente = new Cliente("João", "123");
-    }
-
     @Test
     public void testAddVeiculo() {
-        Veiculo veiculo = new Veiculo("ABC123");
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo = new Veiculo(cliente, "ABC-1234");
         cliente.addVeiculo(veiculo);
-        assertEquals(veiculo, cliente.possuiVeiculo("ABC123"));
+        assertEquals(1, cliente.getVeiculos().size());
     }
 
     @Test
     public void testPossuiVeiculo() {
-        Veiculo veiculo = new Veiculo("DEF456");
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo = new Veiculo(cliente, "ABC-1234");
         cliente.addVeiculo(veiculo);
-        assertEquals(veiculo, cliente.possuiVeiculo("DEF456"));
-        assertNull(cliente.possuiVeiculo("GHI789"));
+        assertTrue(cliente.possuiVeiculo("ABC-1234"));
+        assertFalse(cliente.possuiVeiculo("XYZ-7890"));
     }
 
     @Test
     public void testTotalDeUsos() {
-        assertEquals(0, cliente.totalDeUsos());
-        // Adicione lógica para simular usos e testar novamente
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo = new Veiculo(cliente, "ABC-1234");
+        cliente.addVeiculo(veiculo);
+        Vaga vaga = new Vaga(1, 1);
+        UsoDeVaga uso = new UsoDeVaga(vaga, 5);
+        uso.estacionar(10);
+        uso.sair(30);
+        veiculo.setVaga(uso);
+        assertEquals(1, cliente.totalDeUsos());
     }
 
     @Test
     public void testArrecadadoPorVeiculo() {
-        // Adicione lógica para simular histórico e testar arrecadação por veículo
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo = new Veiculo(cliente, "ABC-1234");
+        cliente.addVeiculo(veiculo);
+        Vaga vaga = new Vaga(1, 1);
+        UsoDeVaga uso = new UsoDeVaga(vaga, 5);
+        uso.estacionar(10);
+        uso.sair(30);
+        veiculo.setVaga(uso);
+        assertEquals(uso.valorPago(), cliente.arrecadadoPorVeiculo("ABC-1234"), 0.001);
     }
 
     @Test
     public void testArrecadadoTotal() {
-        // Adicione lógica para simular histórico e testar arrecadação total
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo1 = new Veiculo(cliente, "ABC-1234");
+        cliente.addVeiculo(veiculo1);
+        Vaga vaga1 = new Vaga(1, 1);
+        UsoDeVaga uso1 = new UsoDeVaga(vaga1, 5);
+        uso1.estacionar(10);
+        uso1.sair(30);
+        veiculo1.setVaga(uso1);
+
+        Veiculo veiculo2 = new Veiculo(cliente, "XYZ-7890");
+        cliente.addVeiculo(veiculo2);
+        Vaga vaga2 = new Vaga(1, 2);
+        UsoDeVaga uso2 = new UsoDeVaga(vaga2, 5);
+        uso2.estacionar(40);
+        uso2.sair(90);
+        veiculo2.setVaga(uso2);
+
+        assertEquals(uso1.valorPago() + uso2.valorPago(), cliente.arrecadadoTotal(), 0.001);
     }
 
     @Test
-    public void testArrecadadoNoMes() {
-        // Adicione lógica para simular histórico e testar arrecadação por mês
+    public void testListarVeiculosCadastrados() {
+        Cliente cliente = new Cliente("João", 1);
+        Veiculo veiculo = new Veiculo(cliente, "ABC-1234");
+        cliente.addVeiculo(veiculo);
+        assertEquals(1, cliente.getVeiculos().size());
+        assertEquals("ABC-1234", cliente.getVeiculos().get(0).getPlaca());
     }
 }
-/*Os testes testTotalDeUsos, testArrecadadoPorVeiculo, testArrecadadoTotal e testArrecadadoNoMes precisarão de uma implementação mais detalhada, simulando históricos e cálculos */

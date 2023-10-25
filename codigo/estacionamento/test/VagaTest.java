@@ -1,45 +1,41 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 public class VagaTest {
 
-    public static void main(String[] args) {
-        testEstacionar();
-        testSair();
-        testIsDisponivel();
-        testGetId();
+    @Test
+    public void testEstacionar() {
+        Vaga vaga = new Vaga(1, 1);
+        assertTrue(vaga.estacionar());
+        assertFalse(vaga.isDisponivel());
     }
 
-    public static void testEstacionar() {
-        Vaga vaga = new Vaga("A", 1);
-        if (vaga.estacionar()) {
-            System.out.println("Teste de estacionar: PASSOU");
-        } else {
-            System.out.println("Teste de estacionar: FALHOU");
-        }
+    @Test
+    public void testSair() {
+        Vaga vaga = new Vaga(1, 1);
+        vaga.estacionar();
+        assertTrue(vaga.sair());
+        assertTrue(vaga.isDisponivel());
     }
 
-    public static void testSair() {
-        Vaga vaga = new Vaga("A", 1);
-        if (!vaga.sair()) {
-            System.out.println("Teste de sair: PASSOU");
-        } else {
-            System.out.println("Teste de sair: FALHOU");
-        }
+    @Test
+    public void testEstacionarVagaOcupada() {
+        Vaga vaga = new Vaga(1, 1);
+        vaga.estacionar();
+        assertFalse(vaga.estacionar());
     }
 
-    public static void testIsDisponivel() {
-        Vaga vaga = new Vaga("A", 1);
-        if (vaga.disponivel()) {
-            System.out.println("Teste de isDisponivel: PASSOU");
-        } else {
-            System.out.println("Teste de isDisponivel: FALHOU");
-        }
+    @Test
+    public void testSairVagaVazia() {
+        Vaga vaga = new Vaga(1, 1);
+        assertFalse(vaga.sair());
     }
 
-    public static void testGetId() {
-        Vaga vaga = new Vaga("A", 1);
-        if ("A01".equals(vaga.getID())) {
-            System.out.println("Teste de getId: PASSOU");
-        } else {
-            System.out.println("Teste de getId: FALHOU");
-        }
+    @Test
+    public void testIsDisponivel() {
+        Vaga vaga = new Vaga(1, 1);
+        assertTrue(vaga.isDisponivel());
+        vaga.estacionar();
+        assertFalse(vaga.isDisponivel());
     }
 }
