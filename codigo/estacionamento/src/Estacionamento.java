@@ -4,25 +4,21 @@ import java.util.List;
 public class Estacionamento {
 
     private String nome;
-    private Vaga[][] vagas;
-    private int quantFileiras;
-    private int vagaDaFileira;
-
-    public Estacionamento(String nome, int quantFileiras, int vagasPorFileira) {
+    private List<Cliente> clientes;
+    private List<Vaga> vagas;
+    
+    public Estacionamento(String nome, int qtdVagas) {
         this.nome = nome;
-        this.quantFileiras = quantFileiras;
-        this.vagaDaFileira = vagasPorFileira;
+        this.clientes = new ArrayList<>();
+        this.vagas = new ArrayList<>();
     }
 
-    public void addVagas(int quantFileiras, int vagasNaFileira) {
-        vagas = new Vaga[quantFileiras][vagasNaFileira];
+    public void addCliente(Cliente nome){
+        clientes.add(nome);
+    }
 
-        for (int i = 0; i < quantFileiras; i++) {
-            for (int j = 0; j < vagasNaFileira; j++) {
-                Vaga novaVaga = new Vaga(i,j);
-                vagas[i][j] = novaVaga;
-            }
-        }
+    public void addVaga(Vaga vaga){
+    vagas.add(vaga);
     }
 
     public double totalArrecadado() {
