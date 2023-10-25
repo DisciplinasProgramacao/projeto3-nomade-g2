@@ -1,51 +1,51 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Estacionamento {
 
-	private String nome;
-	private Cliente[] id;
-	private Vaga[] vagas;
-	private int quantFileiras;
-	private int vagasPorFileira;
+    private String nome;
+    private Vaga[][] vagas;
+    private int quantFileiras;
+    private int vagaDaFileira;
 
-	public Estacionamento(String nome, int fileiras, int vagasPorFila) {
-		
-	}
+    public Estacionamento(String nome, int quantFileiras, int vagasPorFileira) {
+        this.nome = nome;
+        this.quantFileiras = quantFileiras;
+        this.vagaDaFileira = vagasPorFileira;
+    }
 
-	public void addVeiculo(Veiculo veiculo, String idCli) {
-		
-	}
+    public void addVagas(int quantFileiras, int vagasNaFileira) {
+        vagas = new Vaga[quantFileiras][vagasNaFileira];
 
-	public void addCliente(Cliente cliente) {
-		
-	}
+        for (int i = 0; i < quantFileiras; i++) {
+            for (int j = 0; j < vagasNaFileira; j++) {
+                Vaga novaVaga = new Vaga(i,j);
+                vagas[i][j] = novaVaga;
+            }
+        }
+    }
 
-	private void gerarVagas() {
-		
-	}
+    public double totalArrecadado() {
+        // receber o valor retornado pelo método sair()
+        // OU
+        // dar um jeito de colocar esse valor em um arraylist e calcular o total
+        // arrecadado
+        // definir o mês
+        return 0.0;
+    }
 
-	public void estacionar(String placa) {
-		
-	}
+    public double arrecadacaoNoMes(int mes) {
 
-	public double sair(String placa) {
-		
-	}
+        return 0.0;
+    }
 
-	public double totalArrecadado() {
-		
-	}
+    public double valorMedioPorUso() {
 
-	public double arrecadacaoNoMes(int mes) {
-		
-	}
+        return 0.0;
+    }
 
-	public double valorMedioPorUso() {
-		
-	}
+    public String top5Clientes(int mes) {
 
-	public String top5Clientes(int mes) {
-		
-	}
-
+        return "";
+    }
 }

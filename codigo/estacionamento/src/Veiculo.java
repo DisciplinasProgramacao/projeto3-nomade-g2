@@ -2,51 +2,63 @@ import java.util.ArrayList;
 
 public class Veiculo {
 
+	private Cliente nomeCliente;
 	private String placa;
 	private ArrayList<UsoDeVaga> usos;
 	private Double totalArrecadado;
 	private Double arrecadadoMes;
+	private double valorPago;
+	public boolean vagaOcupada;
 
-	public Veiculo(String placa) {
+	public Veiculo(Cliente nomeCliente, String placa) {
+		this.nomeCliente = nomeCliente;
 		this.placa = placa;
 		this.usos = new ArrayList<>();
 		this.totalArrecadado = 0.0;
 		this.arrecadadoMes = 0.0;
 	}
 
-	public boolean estacionar(Vaga vaga) {
-		if (!vaga.estacionar()) {
-			return false;
-		}
-		return vaga.estacionar();
-	}
-
 	public double sair() {
 		double valorPago = usos.get(usos.size() - 1).sair();
 		this.totalArrecadado += valorPago;
 		return valorPago;
-
 	}
 
 	public double totalArrecadado() {
 		return this.totalArrecadado();
 	}
 
-	public double arrecadadoNoMes(int mes) {
-		this.arrecadadoMes = 0.0;
-		for(UsoDeVaga uso: usos){
-			if(uso.saida.getMonth().equals(mes)){
-				this.arrecadadoMes += uso.valorPago();
-			}
-		}
-		return this.arrecadadoMes;
+	public double arrecadadoPorVeiculo(Veiculo placa) {
+		/*
+		 * LÓGICA:
+		 * arrecadacao = VALOR_FRACAO * tempoGasto ----> usar biblioteca Time neste
+		 * caso;
+		 */
+		return valorPago;
 	}
-
-	public int totalDeUsos() {
-		return this.usos.size();
-	}
-
-	public void setVaga(UsoDeVaga usodevaga){
+	
+	public void setVaga(UsoDeVaga usodevaga) {
 		usos.add(usodevaga);
 	}
+
+	public String getPlaca() {
+		return placa;
+	}
 }
+
+/*
+ * TODO#mudancas:
+ * 
+ * + método "calculaArrecadacaoDoVeiculoPorUso(Veiculo placa)" foi para a classe
+ * veículo;
+ * calculaArrecadacaoPorVeiculo(placa: String){
+ * valorPago = VALOR_FRACAO * (saida - entrada)
+ * return valorPago;
+ * }
+ * 
+ * calculaTotalArrecadadoPorVeiculo(): double
+ * // esse método recebe o valorPago do veículo, individualmente, e calcula o
+ * total.
+ * total += valorPago;
+ * return arrecadacaoTotal;
+ */

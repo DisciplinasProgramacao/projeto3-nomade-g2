@@ -1,49 +1,46 @@
-import java.time.Duration;
-import java.time.LocalDateTime;
-
 public class UsoDeVaga {
 
 	private static final double FRACAO_USO = 0.25;
 	private static final double VALOR_FRACAO = 4.0;
 	private static final double VALOR_MAXIMO = 50.0;
 	private Vaga vaga;
-	private LocalDateTime entrada;
-	private LocalDateTime saida;
+	private int entrada;
+	private int saida;
 	private double valorPago;
-	
-	public UsoDeVaga(Vaga vaga) {
+
+	public UsoDeVaga(Vaga vaga){
 		this.vaga = vaga;
 	}
-
-	public double sair() {
-		if (this.vaga.sair()) {
-			this.entrada = LocalDateTime.now();
-			this.saida = LocalDateTime.now();
+	
+	public double sair(int minutoSaida) {
+			this.saida = minutoSaida;
 			return this.valorPago();
-		}
-		return 0.0;
 	}
 
-	//Calcular o valor a ser pago
 	public double valorPago() {
-		if (this.VALOR_FRACAO * fracaoTempoCobrar() > this.VALOR_MAXIMO) {
-			this.valorPago = this.VALOR_MAXIMO;
+		if (VALOR_FRACAO * fracaoTempoCobrar() > VALOR_MAXIMO) {
+			this.valorPago = VALOR_MAXIMO;
 		} else {
-			this.valorPago = this.VALOR_FRACAO * this.fracaoTempoCobrar();
+			this.valorPago = VALOR_FRACAO * this.fracaoTempoCobrar();
 		}
 		return this.valorPago;
 	}
 	
-	private Integer tempoEstacionado(){
-		Duration duration = Duration.between(this.entrada, this.saida);
-		return (int) duration.toMinutes();
+	public Integer tempoEstacionado(){
+		// Duration duration = Duration.between(this.entrada, this.saida);
+		int tempoEstacionado = this.saida - this.entrada;
+		return tempoEstacionado;
 	}
 	
-	private Double fracaoTempoCobrar(){
+	public Double fracaoTempoCobrar(){
 		return Math.floor(tempoEstacionado().doubleValue() / 15.0);
 	}
 
 	public Double getValorPago(){
 		return this.valorPago;
+	}
+
+	public void estacionar(int minutoEntrada) {
+		this.entrada = minutoEntrada;		
 	}
 }

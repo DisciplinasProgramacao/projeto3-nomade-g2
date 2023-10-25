@@ -2,20 +2,11 @@ public class Vaga {
 
 	private String id;
 	private boolean disponivel;
+	private UsoDeVaga uso;
 
-	public Vaga(int i, Integer numero) {
-		this.id =i + String.format("%02d", numero);
-		this.disponivel = true;
-	}
-
-	public Vaga(int i, int numero) {
-    }
-
-    nivel(){
+	public Vaga(int fileira, int posicao) {
+		this.id ="Fila: " + fileira + ", Vaga: " + posicao;
 		this.disponivel = false;
-		return true;
-	}
-		return false;
 	}
 
 	public boolean sair() {
@@ -29,8 +20,13 @@ public class Vaga {
 	public boolean disponivel() {
 		return this.disponivel;
 	}
+
 	public String getID(){
 		return this.id;
+	}
+
+	public String estacionar(Veiculo veiculo, Vaga vaga) {
+		return "Veículo estacionado!";
 	}
 
 }

@@ -1,10 +1,20 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        Vaga vaga1 = new Vaga("A", 10);
-        System.out.println("Id da vaga: " + vaga1.getID());
-        System.out.println("Confirmar estacionamento: " + vaga1.estacionar());
-        UsoDeVaga usodevaga = new UsoDeVaga(vaga1);
-        System.out.println("Confirmar saída de veículo: " + usodevaga.sair());
-        System.out.println("Confirmar vaga disponível: " + vaga1.disponivel());
+
+        Estacionamento xulambsAvenida = new Estacionamento("Afonso Pena", 8, 2);
+        xulambsAvenida.addVagas(8,2);
+        
+        Cliente clienteA = new Cliente("Joana", 12345);
+        Veiculo honda = new Veiculo(clienteA, "CBA123");
+        clienteA.addVeiculo(honda);
+
+        Vaga vagaY8 = new Vaga(4,1);
+        UsoDeVaga uso = new UsoDeVaga(vagaY8);        
+
+        uso.estacionar(15);
+        System.out.println("Valor a pagar: " + uso.sair(45));
+
+        System.out.println("A placa informada pertence ao cliente? " + clienteA.possuiVeiculo("ABC123"));
+        clienteA.listarVeiculosCadastrados();
     }
 }
