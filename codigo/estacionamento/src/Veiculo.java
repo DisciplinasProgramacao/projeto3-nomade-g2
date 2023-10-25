@@ -1,64 +1,47 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Veiculo {
 
-	private Cliente nomeCliente;
-	private String placa;
-	private ArrayList<UsoDeVaga> usos;
-	private Double totalArrecadado;
-	private Double arrecadadoMes;
-	private double valorPago;
-	public boolean vagaOcupada;
+    private Cliente nomeCliente;
+    private String placa;
+    private List<UsoDeVaga> usos;
+    private double totalArrecadado;
 
-	public Veiculo(Cliente nomeCliente, String placa) {
-		this.nomeCliente = nomeCliente;
-		this.placa = placa;
-		this.usos = new ArrayList<>();
-		this.totalArrecadado = 0.0;
-		this.arrecadadoMes = 0.0;
-	}
+    public Veiculo(Cliente nomeCliente, String placa) {
+        this.nomeCliente = nomeCliente;
+        this.placa = placa;
+        this.usos = new ArrayList<>();
+    }
 
-	public double sair() {
-		double valorPago = usos.get(usos.size() - 1).sair();
-		this.totalArrecadado += valorPago;
-		return valorPago;
-	}
+    public void setVaga(UsoDeVaga usoDeVaga) {
+        usos.add(usoDeVaga);
+    }
 
-	public double totalArrecadado() {
-		return this.totalArrecadado();
-	}
+    public double sair() {
+        UsoDeVaga uso = usos.get(usos.size() - 1);
+        double valorPago = uso.sair(uso.getSaida());
+        this.totalArrecadado += valorPago;
+        return valorPago;
+    }
 
-	public double arrecadadoPorVeiculo(Veiculo placa) {
-		/*
-		 * LÓGICA:
-		 * arrecadacao = VALOR_FRACAO * tempoGasto ----> usar biblioteca Time neste
-		 * caso;
-		 */
-		return valorPago;
-	}
-	
-	public void setVaga(UsoDeVaga usodevaga) {
-		usos.add(usodevaga);
-	}
+    public double totalArrecadado() {
+        return this.totalArrecadado;
+    }
 
-	public String getPlaca() {
-		return placa;
-	}
+    public double arrecadadoPorVeiculo() {
+        double arrecadacao = 0.0;
+        for (UsoDeVaga uso : usos) {
+            arrecadacao += uso.valorPago();
+        }
+        return arrecadacao;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public List<UsoDeVaga> getUsos() {
+        return usos;
+    }
 }
-
-/*
- * TODO#mudancas:
- * 
- * + método "calculaArrecadacaoDoVeiculoPorUso(Veiculo placa)" foi para a classe
- * veículo;
- * calculaArrecadacaoPorVeiculo(placa: String){
- * valorPago = VALOR_FRACAO * (saida - entrada)
- * return valorPago;
- * }
- * 
- * calculaTotalArrecadadoPorVeiculo(): double
- * // esse método recebe o valorPago do veículo, individualmente, e calcula o
- * total.
- * total += valorPago;
- * return arrecadacaoTotal;
- */

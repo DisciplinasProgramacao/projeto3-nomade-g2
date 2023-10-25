@@ -1,26 +1,31 @@
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        Estacionamento xulambsAvenida = new Estacionamento("Afonso Pena", 5, 3);
 
-        Estacionamento xulambsAvenida = new Estacionamento("Afonso Pena", 15);
-        
-        Vaga vagaY8 = new Vaga(4,1);
-        
-        xulambsAvenida.addVaga(vagaY8);
-        
-        Cliente clienteA = new Cliente("Joana", 12345);
-        
-        xulambsAvenida.addCliente(clienteA);
-        Veiculo honda = new Veiculo(clienteA, "CBA123");
-        clienteA.addVeiculo(honda);
-        
-        
+        Cliente clienteJoana = new Cliente("Joana", 12345);
+        Veiculo jeep = new Veiculo(clienteJoana, "CBA123");
+        UsoDeVaga usoJoana = new UsoDeVaga(xulambsAvenida.getVagas().get(0), 1);
+        usoJoana.estacionar(0);
+        jeep.setVaga(usoJoana);
+        clienteJoana.addVeiculo(jeep);
+        xulambsAvenida.addCliente(clienteJoana);
 
-        UsoDeVaga uso = new UsoDeVaga(vagaY8);        
+        Cliente clienteHoracio = new Cliente("Horacio", 54321);
+        Veiculo civic = new Veiculo(clienteHoracio, "XYZ789");
+        UsoDeVaga usoHoracio = new UsoDeVaga(xulambsAvenida.getVagas().get(1), 1); 
+        usoHoracio.estacionar(0);
+        
+        int horaSaida = 120;
+        usoHoracio.sair(horaSaida);
+        
+        civic.setVaga(usoHoracio);
+        clienteHoracio.addVeiculo(civic);
+        xulambsAvenida.addCliente(clienteHoracio);
 
-        uso.estacionar(0);
-        System.out.println("Valor a pagar: R$" + uso.sair(60));
-
-        System.out.println("A placa informada pertence ao cliente? " + clienteA.possuiVeiculo("ABC123"));
-        clienteA.listarVeiculosCadastrados();
+        System.out.println("Total arrecadado: R$" + xulambsAvenida.totalArrecadado());
+        System.out.println("Arrecadação no mês 1: R$" + xulambsAvenida.arrecadacaoNoMes(1));
+        System.out.println("Valor médio por uso: R$" + xulambsAvenida.valorMedioPorUso());
+        System.out.println("Top 5 clientes no mês 1:");
+        System.out.println(xulambsAvenida.top5Clientes(1));
     }
 }
