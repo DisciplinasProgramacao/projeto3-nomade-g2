@@ -117,20 +117,6 @@ public class Cliente {
     }
 
     /**
-     * Lista todos os veículos cadastrados para o cliente.
-     */
-    public void listarVeiculosCadastrados() {
-        if (veiculosCadastrados.isEmpty()) {
-            System.out.println("Nenhum veículo cadastrado para este cliente.");
-        } else {
-            System.out.println("Veículos cadastrados para o cliente " + nome + ":");
-            for (Veiculo veiculo : veiculosCadastrados) {
-                System.out.println("Placa: " + veiculo.getPlaca());
-            }
-        }
-    }
-
-    /**
      * Retorna a lista de veículos cadastrados do cliente.
      * 
      * @return Lista de veículos.
